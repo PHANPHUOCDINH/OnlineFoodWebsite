@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v2.1",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v2.1": {
+      "OnlineFoodWebsite.Model/1.0.0": {
+        "runtime": {
+          "OnlineFoodWebsite.Model.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "OnlineFoodWebsite.Model/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
