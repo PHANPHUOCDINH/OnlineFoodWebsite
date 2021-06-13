@@ -1,9 +1,0 @@
-C:\Users\Admin\source\repos\OnlineFoodWebsite\OnlineFoodWebsite.Model\bin\Debug\netcoreapp2.0\OnlineFoodWebsite.Model.deps.json
-C:\Users\Admin\source\repos\OnlineFoodWebsite\OnlineFoodWebsite.Model\bin\Debug\netcoreapp2.0\OnlineFoodWebsite.Model.dll
-C:\Users\Admin\source\repos\OnlineFoodWebsite\OnlineFoodWebsite.Model\bin\Debug\netcoreapp2.0\OnlineFoodWebsite.Model.pdb
-C:\Users\Admin\source\repos\OnlineFoodWebsite\OnlineFoodWebsite.Model\obj\Debug\netcoreapp2.0\OnlineFoodWebsite.Model.csprojAssemblyReference.cache
-C:\Users\Admin\source\repos\OnlineFoodWebsite\OnlineFoodWebsite.Model\obj\Debug\netcoreapp2.0\OnlineFoodWebsite.Model.AssemblyInfoInputs.cache
-C:\Users\Admin\source\repos\OnlineFoodWebsite\OnlineFoodWebsite.Model\obj\Debug\netcoreapp2.0\OnlineFoodWebsite.Model.AssemblyInfo.cs
-C:\Users\Admin\source\repos\OnlineFoodWebsite\OnlineFoodWebsite.Model\obj\Debug\netcoreapp2.0\OnlineFoodWebsite.Model.csproj.CoreCompileInputs.cache
-C:\Users\Admin\source\repos\OnlineFoodWebsite\OnlineFoodWebsite.Model\obj\Debug\netcoreapp2.0\OnlineFoodWebsite.Model.dll
-C:\Users\Admin\source\repos\OnlineFoodWebsite\OnlineFoodWebsite.Model\obj\Debug\netcoreapp2.0\OnlineFoodWebsite.Model.pdb

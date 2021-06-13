@@ -1,0 +1,50 @@
+﻿@model OnlineFoodWebsite.Model.CTNNL
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>CTNNL</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.MANL)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MANL)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SOLUONG)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SOLUONG)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DONVI)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DONVI)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NGAYNHAP)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NGAYNHAP)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.MACTN }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

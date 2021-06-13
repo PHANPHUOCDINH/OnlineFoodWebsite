@@ -1,0 +1,63 @@
+﻿@model IEnumerable<OnlineFoodWebsite.Model.HOADON>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.MAKH)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NGAYLAP)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.THANHTIEN)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GIAMGIA)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GHICHU)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TRANGTHAI)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.MAKH)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NGAYLAP)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.THANHTIEN)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GIAMGIA)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GHICHU)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TRANGTHAI)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.MAHD }) |
+            @Html.ActionLink("Details", "Details", new { id=item.MAHD }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.MAHD })
+        </td>
+    </tr>
+}
+
+</table>

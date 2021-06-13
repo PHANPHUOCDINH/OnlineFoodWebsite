@@ -79,3 +79,8 @@ C:\Users\Admin\source\repos\OnlineFoodWebsite\OnlineFoodWebsite\obj\Debug\Online
 C:\Users\Admin\source\repos\OnlineFoodWebsite\OnlineFoodWebsite\obj\Debug\OnlineFoodWebsite.pdb
 C:\Users\Admin\source\repos\OnlineFoodWebsite\OnlineFoodWebsite\bin\OnlineFoodWebsite.Model.dll
 C:\Users\Admin\source\repos\OnlineFoodWebsite\OnlineFoodWebsite\bin\OnlineFoodWebsite.Model.pdb
+C:\Users\Admin\source\repos\OnlineFoodWebsite\OnlineFoodWebsite\bin\OnlineFoodWebsite.Model.dll.config
+C:\Users\Admin\source\repos\OnlineFoodWebsite\OnlineFoodWebsite\bin\EntityFramework.xml
+C:\Users\Admin\source\repos\OnlineFoodWebsite\OnlineFoodWebsite\bin\EntityFramework.dll
+C:\Users\Admin\source\repos\OnlineFoodWebsite\OnlineFoodWebsite\bin\EntityFramework.SqlServer.dll
+C:\Users\Admin\source\repos\OnlineFoodWebsite\OnlineFoodWebsite\bin\EntityFramework.SqlServer.xml

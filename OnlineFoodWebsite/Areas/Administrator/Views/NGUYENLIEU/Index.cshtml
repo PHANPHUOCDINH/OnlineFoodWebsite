@@ -1,0 +1,45 @@
+﻿@model IEnumerable<OnlineFoodWebsite.Model.NGUYENLIEU>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TENNL)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MOTA)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TINHTRANG)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TENNL)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MOTA)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TINHTRANG)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.MANL }) |
+            @Html.ActionLink("Details", "Details", new { id=item.MANL }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.MANL })
+        </td>
+    </tr>
+}
+
+</table>

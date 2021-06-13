@@ -1,0 +1,34 @@
+﻿@model OnlineFoodWebsite.Model.MON
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Xóa</h2>
+
+<h3>Xóa món này?</h3>
+<div>
+    <h4>MON</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Tên món ăn
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TENMON)
+        </dd>
+
+       
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
