@@ -1,0 +1,66 @@
+﻿@model List<OnlineFoodWebsite.Model.HOADON>
+@{
+    ViewBag.Title = "MyOrders";
+}
+
+<style>
+    .center {
+        margin: auto;
+        width: 60%;
+        padding: 100px;
+    }
+</style>
+<h2>Đơn hàng của tôi</h2>
+<div class="content">
+    @if (Model.Count > 0)
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <td>STT</td>
+                    <td>Mã đơn</td>
+                    <td>Ngày lập</td>
+                    <td>Tổng tiền</td>
+                    <td>Ghi chú</td>
+                    <td>Trạng thái</td>
+                    <td></td>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                @{ int i = 0;
+                    foreach (var item in Model)
+                    {
+                        i++;
+                                <tr>
+                                    <td>@i</td>
+                                    <td><a href="/User/MyOrderDetail?id=@item.MAHD">@Html.DisplayFor(modelItem => item.MAHD)</a></td>
+                                    <td>@Html.DisplayFor(modelItem => item.NGAYLAP)</td>
+
+
+                                    @*<td><input type="text" class="txtGhiChu" data-id="@item.MAMON" value="@item.GHICHU" /></td>
+        <td><input type="text" class="txtQuantity" data-id="@item.MAMON" value="@item.SOLUONG" /></td>*@
+                                    <td>@Html.DisplayFor(modelItem => item.TONGTIEN)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.GHICHU)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.TRANGTHAI)</td>
+                                    @if (item.TRANGTHAI == "Confirming")
+                                    {
+                                        <td><a href="/User/DeleteOrder?id=@item.MAHD">Hủy đơn</a></td>
+                                    }
+                                    else if(item.TRANGTHAI=="Finished")
+                                    {
+                                        <td><a>Đánh giá đơn</a></td>
+                                    }
+                                </tr>
+                    }
+                }
+
+            </tbody>
+        </table>
+        
+    }
+    else
+    {
+        <span>Chưa từng mua đơn nào</span>
+    }
+</div>

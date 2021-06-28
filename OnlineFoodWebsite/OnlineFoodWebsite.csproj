@@ -59,6 +59,9 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.SQLite, Version=1.0.113.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.113.3\lib\net46\System.Data.SQLite.dll</HintPath>
+    </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -135,9 +138,11 @@
     <Compile Include="Areas\Administrator\Controllers\LOAIMONController.cs" />
     <Compile Include="Areas\Administrator\Controllers\MONController.cs" />
     <Compile Include="Areas\Administrator\Controllers\NGUYENLIEUController.cs" />
-    <Compile Include="Areas\Administrator\Controllers\NHANVIENsontroller.cs" />
-    <Compile Include="Areas\Administrator\Controllers\TAIKHOANController.cs" />
+    <Compile Include="Areas\Administrator\Controllers\NHANVIENController.cs" />
+    <Compile Include="Areas\Administrator\Controllers\ThongKeController.cs" />
+    <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -162,6 +167,7 @@
     <Content Include="Areas\Administrator\Content\images\inbox.png" />
     <Content Include="Areas\Administrator\Content\images\mastercard.png" />
     <Content Include="Areas\Administrator\Content\images\media.jpg" />
+    <Content Include="Areas\Administrator\Content\images\MSP003.jpg" />
     <Content Include="Areas\Administrator\Content\images\paypal.png" />
     <Content Include="Areas\Administrator\Content\images\picture.jpg" />
     <Content Include="Areas\Administrator\Content\images\prod-1.jpg" />
@@ -3672,6 +3678,7 @@
     <Content Include="Areas\Administrator\Content\vendors\validator\index.html" />
     <Content Include="Areas\Administrator\Content\vendors\validator\multifield.js" />
     <Content Include="Areas\Administrator\Content\vendors\validator\validator.js" />
+    <Content Include="assets\client\js\controller\cartController.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -4752,6 +4759,9 @@
     <Content Include="Areas\Administrator\Content\vendors\validator\.bower.json" />
     <Content Include="Areas\Administrator\Content\vendors\validator\README.md" />
     <Content Include="Areas\Administrator\Content\vendors\validator\validator.jquery.json" />
+    <Content Include="Areas\Administrator\Views\CTNNL\TaoMoiNL.cshtml" />
+    <Content Include="Areas\Administrator\Views\ThongKe\ThongKeMonAn.cshtml" />
+    <Content Include="Areas\Administrator\Views\ThongKe\ThongKeChiNguyenLieu.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -4777,6 +4787,17 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\Detail.cshtml" />
+    <Content Include="Views\Home\SanPhamBanChay.cshtml" />
+    <Content Include="Views\User\Register.cshtml" />
+    <Content Include="Views\User\Login.cshtml" />
+    <Content Include="Views\Cart\Index.cshtml" />
+    <Content Include="Views\Cart\Confirm.cshtml" />
+    <Content Include="Views\Home\Menu.cshtml" />
+    <Content Include="Views\Home\MenuBy.cshtml" />
+    <Content Include="Views\User\MyOrders.cshtml" />
+    <Content Include="Views\User\MyOrderDetail.cshtml" />
+    <Content Include="Views\Home\SearchResult.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -4843,7 +4864,9 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.113.3\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.113.3\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets'))" />
   </Target>
+  <Import Project="..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.113.3\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets" Condition="Exists('..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.113.3\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

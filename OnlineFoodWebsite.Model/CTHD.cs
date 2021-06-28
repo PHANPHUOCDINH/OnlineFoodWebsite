@@ -10,19 +10,21 @@ namespace OnlineFoodWebsite.Model
     public partial class CTHD
     {
         [Key]
-        [Column(Order = 0)]
-        [StringLength(10)]
-        public string MAHD { get; set; }
+        [StringLength(30)]
+        public string MACTHD { get; set; }
 
-        [Key]
-        [Column(Order = 1)]
-        [StringLength(10)]
-        public string MAKH { get; set; }
-
-        [StringLength(10)]
+        [StringLength(30)]
         public string MAMON { get; set; }
 
         [StringLength(30)]
+        public string MAHD { get; set; }
+
+        [StringLength(30)]
         public string GHICHU { get; set; }
+
+        public virtual HOADON HOADON { get; set; }
+
+        public virtual MON MON { get; set; }
+        public int? SOLUONG { get; set; }
     }
 }

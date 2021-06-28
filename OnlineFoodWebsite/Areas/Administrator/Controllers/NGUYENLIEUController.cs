@@ -12,7 +12,7 @@ namespace OnlineFoodWebsite.Areas.Administrator.Controllers
 {
     public class NGUYENLIEUController : Controller
     {
-        private FoodOnlineWebsiteDbContext db = new FoodOnlineWebsiteDbContext();
+        private OnlineFoodWebsiteDbContext db = new OnlineFoodWebsiteDbContext();
 
         // GET: Administrator/NGUYENLIEU
         public ActionResult Index()

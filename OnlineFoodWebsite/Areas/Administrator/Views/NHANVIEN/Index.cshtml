@@ -4,54 +4,72 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Danh sách nhân viên hệ thống</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+
 <table class="table">
     <tr>
+        <th>STT</th>
         <th>
-            @Html.DisplayNameFor(model => model.TENTK)
+           Mã nhân viên
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.HOTEN)
+           Tên nhân viên
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.NGAYSINH)
+            Ngày sinh
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.GIOITINH)
+            SĐT
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.SDT)
+            Chức vụ
         </th>
-        <th></th>
+        <th>Hoạt động gần nhất</th>
     </tr>
 
-@foreach (var item in Model) {
+@{ 
+    int i = 0;
+    foreach (var item in Model) {
+        i++;
     <tr>
+        <td>@i</td>
         <td>
-            @Html.DisplayFor(modelItem => item.TENTK)
+            @Html.DisplayFor(modelItem => item.MANV)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.HOTEN)
+            @Html.DisplayFor(modelItem => item.TENNV)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.NGAYSINH)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.GIOITINH)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.SDT)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.MANV }) |
-            @Html.ActionLink("Details", "Details", new { id=item.MANV }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.MANV })
+            @Html.DisplayFor(modelItem => item.CHUCVU)
         </td>
-    </tr>
-}
+        <td>
+            @Html.DisplayFor(modelItem => item.LASTACTIVE)
+        </td>
+        @{ if (((string)Session["role"])=="Quản Lý")
+            {
+                <td>
+                    @Html.ActionLink("Sửa", "Edit", new { id = item.MANV }) |
+                    @Html.ActionLink("Chi tiết", "Details", new { id = item.MANV }) |
+                    @Html.ActionLink("Xóa", "Delete", new { id = item.MANV })
+                </td>
+            }
+            else
+            {
+    
+            }
+        }
 
+    </tr>
+        }
+    }
 </table>
+<p>
+    @Html.ActionLink("Thêm mới", "Create")
+</p>

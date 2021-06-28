@@ -10,14 +10,17 @@ namespace OnlineFoodWebsite.Model
     public partial class NHANVIEN
     {
         [Key]
-        [StringLength(10)]
+        [StringLength(30)]
         public string MANV { get; set; }
 
-        [StringLength(30)]
-        public string TENTK { get; set; }
-
         [StringLength(40)]
-        public string HOTEN { get; set; }
+        public string TENNV { get; set; }
+
+        [StringLength(10)]
+        public string TAIKHOAN { get; set; }
+
+        [StringLength(50)]
+        public string MATKHAU { get; set; }
 
         [Column(TypeName = "date")]
         public DateTime? NGAYSINH { get; set; }
@@ -26,5 +29,13 @@ namespace OnlineFoodWebsite.Model
 
         [StringLength(11)]
         public string SDT { get; set; }
+
+        [StringLength(30)]
+        public string CHUCVU { get; set; }
+
+        [StringLength(60)]
+        public string HINHANH { get; set; }
+
+        public DateTime? LASTACTIVE { get; set; }
     }
 }

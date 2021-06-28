@@ -12,7 +12,7 @@ namespace OnlineFoodWebsite.Areas.Administrator.Controllers
 {
     public class KHACHHANGController : Controller
     {
-        private FoodOnlineWebsiteDbContext db = new FoodOnlineWebsiteDbContext();
+        private OnlineFoodWebsiteDbContext db = new OnlineFoodWebsiteDbContext();
 
         // GET: Administrator/KHACHHANG
         public ActionResult Index()
@@ -27,12 +27,8 @@ namespace OnlineFoodWebsite.Areas.Administrator.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            KHACHHANG kHACHHANG = db.KHACHHANGs.Find(id);
-            if (kHACHHANG == null)
-            {
-                return HttpNotFound();
-            }
-            return View(kHACHHANG);
+            ViewBag.MAKH = id;
+            return View(db.HOADONs.Where(x=>x.MAKH==id).ToList());
         }
 
         // GET: Administrator/KHACHHANG/Create

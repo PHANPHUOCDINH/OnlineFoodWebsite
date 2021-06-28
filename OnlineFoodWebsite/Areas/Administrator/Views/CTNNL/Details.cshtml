@@ -1,50 +1,64 @@
-﻿@model OnlineFoodWebsite.Model.CTNNL
+﻿@model IEnumerable<OnlineFoodWebsite.Model.CTNNL>
 
 @{
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>Chi tiết nhập nguyên liệu</h2>
 
-<div>
-    <h4>CTNNL</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.MANL)
-        </dt>
+    <h4>@ViewBag.TENNL</h4>
+    <table class="table">
+        <tr>
+            <th>
+                STT
+            </th>
 
-        <dd>
-            @Html.DisplayFor(model => model.MANL)
-        </dd>
+            <th>
+                Số lượng
+            </th>
+            <th>
+                Đơn vị tính
+            </th>
+            <th>
+                Chi phí
+            </th>
+            <th>
+                Ghi chú
+            </th>
+            <th>Thời gian cập nhật</th>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.SOLUONG)
-        </dt>
+        </tr>
 
-        <dd>
-            @Html.DisplayFor(model => model.SOLUONG)
-        </dd>
+        @{
+            int i = 0;
+            foreach (var item in Model)
+            {
+                i++;
+                <tr>
+                    <td>@i</td>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.DONVI)
-        </dt>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SOLUONG)
+                    </td>
 
-        <dd>
-            @Html.DisplayFor(model => model.DONVI)
-        </dd>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DONVITINH)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CHIPHI)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.GHICHU)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NGAYNHAP)
+                    </td>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.NGAYNHAP)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.NGAYNHAP)
-        </dd>
-
-    </dl>
-</div>
+                </tr>
+            }
+        }
+    </table>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.MACTN }) |
+    
     @Html.ActionLink("Back to List", "Index")
 </p>

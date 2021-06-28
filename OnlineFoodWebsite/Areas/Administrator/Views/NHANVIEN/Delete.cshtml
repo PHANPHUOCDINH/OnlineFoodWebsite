@@ -4,51 +4,83 @@
     ViewBag.Title = "Delete";
 }
 
-<h2>Delete</h2>
+<h2>Xóa nhân viên</h2>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>Bạn muốn xóa nhân viên này?</h3>
 <div>
-    <h4>NHANVIEN</h4>
+    <h4>@Model.TENNV</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.TENTK)
+            Mã nhân viên
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.TENTK)
+            @Html.DisplayFor(model => model.MANV)
         </dd>
-
+        <br />
         <dt>
-            @Html.DisplayNameFor(model => model.HOTEN)
+            Tên nhân viên
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.HOTEN)
+            @Html.DisplayFor(model => model.TENNV)
         </dd>
-
+        <br />
         <dt>
-            @Html.DisplayNameFor(model => model.NGAYSINH)
+            Ngày sinh
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.NGAYSINH)
         </dd>
-
+        <br />
         <dt>
-            @Html.DisplayNameFor(model => model.GIOITINH)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.GIOITINH)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.SDT)
+            SĐT
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.SDT)
+        </dd>
+        <br />
+        <dt>
+            Chức vụ
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CHUCVU)
+        </dd>
+        <br />
+        <dt>
+            Tài khoản đăng nhập
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TAIKHOAN)
+        </dd>
+        <br />
+        <dt>
+            Mật khẩu đăng nhập
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MATKHAU)
+        </dd>
+        <br />
+        <dt>
+            Hoạt động gần nhất
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LASTACTIVE)
+        </dd>
+        <br />
+        <dt>
+            Hình minh họa
+        </dt>
+
+        <dd>
+            <img src="~/Areas/Administrator/Content/images/@Url.Content(Model.HINHANH)" alt="Image" width="128" height="128" />
         </dd>
 
     </dl>

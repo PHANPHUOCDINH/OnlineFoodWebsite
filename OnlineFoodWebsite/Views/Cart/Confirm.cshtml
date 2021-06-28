@@ -1,0 +1,88 @@
+﻿@model OnlineFoodWebsite.Model.KHACHHANG
+
+@{
+    ViewBag.Title = "Confirm";
+}
+
+<h2>Xác nhận đơn hàng</h2>
+
+@using (Html.BeginForm("Confirm","Cart",FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+        <div class="form-group">
+            @Html.Label("Tên khách hàng", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Model.TENKH
+            </div>
+        </div>
+
+
+
+
+
+        <div class="form-group">
+            @Html.Label("Địa chỉ", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Model.DIACHI
+            </div>
+        </div>
+
+
+
+        <div class="form-group">
+            @Html.Label("Số điện thoại", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Model.SDT
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Email", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Model.EMAIL
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Tổng tiền", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @ViewBag.TongTien VNĐ
+
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("Tổng món", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @ViewBag.TongMon
+
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("Ghi chú", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="text" name="ghichu" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Xác nhận" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+<style>
+    .xx {
+        margin-left: 216px;
+        width: 60%;
+    }
+</style>
+<div class="xx">
+    @Html.ActionLink("Quay lại giỏ hàng", "Index", "Cart")
+</div>

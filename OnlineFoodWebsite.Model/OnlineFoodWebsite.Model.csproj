@@ -52,15 +52,14 @@
   <ItemGroup>
     <Compile Include="CTHD.cs" />
     <Compile Include="CTNNL.cs" />
-    <Compile Include="FoodOnlineWebsiteDbContext.cs" />
     <Compile Include="HOADON.cs" />
     <Compile Include="KHACHHANG.cs" />
     <Compile Include="LOAIMON.cs" />
     <Compile Include="MON.cs" />
     <Compile Include="NGUYENLIEU.cs" />
     <Compile Include="NHANVIEN.cs" />
+    <Compile Include="OnlineFoodWebsiteDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TAIKHOAN.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

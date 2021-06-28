@@ -12,7 +12,7 @@ namespace OnlineFoodWebsite.Areas.Administrator.Controllers
 {
     public class LOAIMONController : Controller
     {
-        private FoodOnlineWebsiteDbContext db = new FoodOnlineWebsiteDbContext();
+        private OnlineFoodWebsiteDbContext db = new OnlineFoodWebsiteDbContext();
 
         // GET: Administrator/LOAIMON
         public ActionResult Index()

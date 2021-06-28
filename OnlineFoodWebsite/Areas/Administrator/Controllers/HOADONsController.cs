@@ -12,7 +12,7 @@ namespace OnlineFoodWebsite.Areas.Administrator.Controllers
 {
     public class HOADONsController : Controller
     {
-        private FoodOnlineWebsiteDbContext db = new FoodOnlineWebsiteDbContext();
+        private OnlineFoodWebsiteDbContext db = new OnlineFoodWebsiteDbContext();
 
         // GET: Administrator/HOADONs
         public ActionResult Index()
@@ -27,12 +27,8 @@ namespace OnlineFoodWebsite.Areas.Administrator.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            HOADON hOADON = db.HOADONs.Find(id);
-            if (hOADON == null)
-            {
-                return HttpNotFound();
-            }
-            return View(hOADON);
+            
+            return View(db.CTHDs.Where(x=>x.MAHD==id).ToList());
         }
 
         // GET: Administrator/HOADONs/Create
@@ -78,11 +74,14 @@ namespace OnlineFoodWebsite.Areas.Administrator.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "MAHD,MAKH,NGAYLAP,THANHTIEN,GIAMGIA,GHICHU,TRANGTHAI")] HOADON hOADON)
+        public ActionResult Edit(string id,[Bind(Include = "TRANGTHAI")] HOADON hOADON)
         {
+            HOADON hoadon = db.HOADONs.Find(id);
             if (ModelState.IsValid)
             {
-                db.Entry(hOADON).State = EntityState.Modified;
+     
+                hoadon.TRANGTHAI = hOADON.TRANGTHAI;
+                db.Entry(hoadon).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

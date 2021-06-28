@@ -1,0 +1,56 @@
+﻿@model List<OnlineFoodWebsite.Model.NGUYENLIEU>
+@{
+    ViewBag.Title = "ThongKeChiNguyenLieu";
+}
+
+<h2>Thống kê chi nguyên liệu</h2>
+<form action="/Administrator/ThongKe/ThongKeChiNguyenLieu" method="post">
+    <label for="month">Tháng</label>
+    <input type="number" max="12" min="1" name="month" value="@ViewBag.thang" />
+    <label for="year">Năm</label>
+    <input type="number" name="year" value="@ViewBag.nam" />
+    <input type="submit" name="submit" value="Chọn" />
+</form>
+
+<table class="table table-bordered table-hover" id="myTable">
+    <br />
+    <tr>
+        <th>STT</th>
+
+        <th>
+            Tên nguyên liệu
+        </th>
+        <th>
+            Mô tả
+        </th>
+        <th>
+            Chi phí nhập
+        </th>
+    </tr>
+
+    @{
+        int i = 0;
+        if (Model != null)
+        {
+            foreach (var item in Model)
+            {
+                i++;
+                <tr>
+                    <td>@i</td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TENNL)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MOTA)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.temp)
+                    </td>
+
+                </tr>
+            }
+        }
+    }
+</table>
+

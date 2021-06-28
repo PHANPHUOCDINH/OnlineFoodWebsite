@@ -4,60 +4,57 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Danh sách khách hàng</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.TENTK)
+           STT
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.HOTEN)
+            Mã khách hàng
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.NGAYSINH)
+            Tên khách hàng
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.DIACHI)
+            SĐT
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.GIOITINH)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SDT)
-        </th>
-        <th></th>
+           Địa chỉ
+         </th>
+       
+        <th>Email</th>
     </tr>
 
-@foreach (var item in Model) {
+@{
+    int i =0;
+    foreach (var item in Model) {
+        i++;
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.TENTK)
+            @i
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.HOTEN)
+            @Html.DisplayFor(modelItem => item.MAKH)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.NGAYSINH)
+            @Html.DisplayFor(modelItem => item.TENKH)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DIACHI)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.GIOITINH)
-        </td>
+
         <td>
             @Html.DisplayFor(modelItem => item.SDT)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.MAKH }) |
-            @Html.ActionLink("Details", "Details", new { id=item.MAKH }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.MAKH })
+            @Html.DisplayFor(modelItem => item.DIACHI)
+        </td>
+        <td> @Html.DisplayFor(modelItem => item.EMAIL)</td>
+        <td>
+            @Html.ActionLink("Xem đơn hàng đã mua", "Details", new { id = item.MAKH })
+
         </td>
     </tr>
-}
-
+    }
+    }
 </table>

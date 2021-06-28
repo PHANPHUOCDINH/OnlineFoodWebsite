@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -12,7 +13,11 @@ namespace OnlineFoodWebsite.Areas.Administrator.Controllers
 {
     public class MONController : Controller
     {
-        private FoodOnlineWebsiteDbContext db = new FoodOnlineWebsiteDbContext();
+        private static readonly DateTime Jan1st1970 = new DateTime
+    (1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+
+        
+        private OnlineFoodWebsiteDbContext db = new OnlineFoodWebsiteDbContext();
 
         // GET: Administrator/MON
         public ActionResult Index()
@@ -38,6 +43,7 @@ namespace OnlineFoodWebsite.Areas.Administrator.Controllers
         // GET: Administrator/MON/Create
         public ActionResult Create()
         {
+            ViewBag.MALOAI = new SelectList(db.LOAIMONs, "MALOAI", "TENLOAI");
             return View();
         }
 
@@ -46,21 +52,41 @@ namespace OnlineFoodWebsite.Areas.Administrator.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "MAMON,TENMON,MOTA,GIA,TINHTRANG,LOAIMON")] MON mON)
+        public ActionResult Create([Bind(Include = "MAMON,TENMON,MOTA,GIA,TINHTRANG,MALOAI,DONVITINH")] MON mON,HttpPostedFileBase file)
         {
-            if (ModelState.IsValid)
+           
+            if (file != null)
             {
-                db.MONs.Add(mON);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+               
+                string ImageName = System.IO.Path.GetFileName(file.FileName);
+                string physicalPath = Server.MapPath("~/Areas/Administrator/Content/images/" + ImageName);
 
+                // save image in folder
+                file.SaveAs(physicalPath);
+
+                if (ModelState.IsValid)
+                {
+                    string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+                    mON.MAMON = CurrentTimeMillis().ToString();
+                    mON.HINHANH = ImageName;
+                    db.MONs.Add(mON);
+                    db.SaveChanges();
+                    
+                    return RedirectToAction("Index");
+
+                }
+
+            }
+            
+            ViewBag.MALOAI = new SelectList(db.LOAIMONs, "MALOAI", "TENLOAI");
             return View(mON);
         }
 
         // GET: Administrator/MON/Edit/5
         public ActionResult Edit(string id)
         {
+
+            ViewBag.MALOAI = new SelectList(db.LOAIMONs, "MALOAI", "TENLOAI");
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -78,14 +104,48 @@ namespace OnlineFoodWebsite.Areas.Administrator.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "MAMON,TENMON,MOTA,GIA,TINHTRANG,LOAIMON")] MON mON)
+        public ActionResult Edit(string id,[Bind(Include = "TENMON,MOTA,GIA,TINHTRANG,MALOAI,DONVITINH")] MON mON, HttpPostedFileBase file)
         {
-            if (ModelState.IsValid)
+            MON mon = db.MONs.Find(id);
+            if (file != null)
             {
-                db.Entry(mON).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+
+                string ImageName = System.IO.Path.GetFileName(file.FileName);
+                string physicalPath = Server.MapPath("~/Areas/Administrator/Content/images/" + ImageName);
+
+                // save image in folder
+                file.SaveAs(physicalPath);
+                if (ModelState.IsValid)
+                {
+                    mon.TENMON = mON.TENMON;
+                    mon.MALOAI = mON.MALOAI;
+                    mon.GIA = mON.GIA;
+                    mon.DONVITINH = mON.DONVITINH;
+                    mon.TINHTRANG = mON.TINHTRANG;
+                    mon.MOTA = mON.MOTA;
+
+                    mon.HINHANH = ImageName;
+                    db.Entry(mon).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
             }
+            else
+            {
+                if (ModelState.IsValid)
+                {
+                    mon.TENMON = mON.TENMON;
+                    mon.MALOAI = mON.MALOAI;
+                    mon.GIA = mON.GIA;
+                    mon.DONVITINH = mON.DONVITINH;
+                    mon.TINHTRANG = mON.TINHTRANG;
+                    mon.MOTA = mON.MOTA;
+                    db.Entry(mon).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            }
+            ViewBag.MALOAI = new SelectList(db.LOAIMONs, "MALOAI", "TENLOAI");
             return View(mON);
         }
 
@@ -123,5 +183,13 @@ namespace OnlineFoodWebsite.Areas.Administrator.Controllers
             }
             base.Dispose(disposing);
         }
+       
+
+        public static long CurrentTimeMillis()
+        {
+            return (long)(DateTime.UtcNow - Jan1st1970).TotalMilliseconds;
+        }
     }
+   
+   
 }

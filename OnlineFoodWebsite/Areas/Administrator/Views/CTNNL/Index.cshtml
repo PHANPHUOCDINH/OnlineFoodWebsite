@@ -1,51 +1,57 @@
-﻿@model IEnumerable<OnlineFoodWebsite.Model.CTNNL>
+﻿@model IEnumerable<OnlineFoodWebsite.Model.NGUYENLIEU>
 
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Danh sách nguyên liệu</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.MANL)
+            STT
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.SOLUONG)
+            Tên nguyên liệu
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.DONVI)
+            Mô tả
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.NGAYNHAP)
+            Hình ảnh
         </th>
-        <th></th>
+        <th>Cập nhật lần cuối</th>
+        
     </tr>
 
-@foreach (var item in Model) {
+@{ 
+    int i = 0;
+    foreach (var item in Model) {
+        i++;
     <tr>
+        <td>@i</td>
         <td>
-            @Html.DisplayFor(modelItem => item.MANL)
+            @Html.DisplayFor(modelItem => item.TENNL)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.SOLUONG)
+            @Html.DisplayFor(modelItem => item.MOTA)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.DONVI)
+            <img src="~/Areas/Administrator/Content/images/@Url.Content(item.HINHANH)" alt="Image" width="128" height="128" />
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.NGAYNHAP)
+            @Html.DisplayFor(modelItem => item.LASTUPDATE)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.MACTN }) |
-            @Html.ActionLink("Details", "Details", new { id=item.MACTN }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.MACTN })
+            @Html.ActionLink("Cập nhật", "Create", new { id = item.MANL }) |
+            @Html.ActionLink("Xem chi tiết", "Details", new { id = item.MANL }) @*|
+            @Html.ActionLink("Delete", "Delete", new { id = item.MACTN })*@
         </td>
     </tr>
-}
-
+        }
+    }
 </table>
+<p>
+    @Html.ActionLink("Thêm nguyên liệu mới", "TaoMoiNL")
+</p>

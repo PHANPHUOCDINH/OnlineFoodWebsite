@@ -6,28 +6,78 @@
 
 <h2>Xóa</h2>
 
-<h3>Xóa món này?</h3>
+<h3>Bạn có chắc chắn muốn xóa món ăn này?</h3>
 <div>
-    <h4>MON</h4>
+   
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            Tên món ăn
+            Mã món
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MAMON)
+        </dd>
+        <br />
+        <dt>
+            Tên món
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.TENMON)
         </dd>
+        <br />
+        <dt>
+            Loại món
+        </dt>
 
-       
+        <dd>
+            @Html.DisplayFor(model => model.MALOAI)
+        </dd>
+        <br />
+        <dt>
+            Giá
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GIA)
+        </dd>
+        <br />
+        <dt>
+            Mô tả
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MOTA)
+        </dd>
+        <br />
+        <dt>
+            Hình minh họa
+        </dt>
+
+        <dd>
+            <img src="~/Areas/Administrator/Content/images/@Url.Content(Model.HINHANH)" alt="Image" width="128" height="128" />
+        </dd>
+        <br />
+        <dt>
+            Tình trạng
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TINHTRANG)
+        </dd>
+
+
+
 
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
+            <input type="submit" value="Xóa" class="btn btn-default" /> |
             @Html.ActionLink("Back to List", "Index")
         </div>
     }

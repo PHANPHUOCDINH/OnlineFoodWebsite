@@ -12,7 +12,7 @@ namespace OnlineFoodWebsite.Areas.Administrator.Controllers
 {
     public class CTHDController : Controller
     {
-        private FoodOnlineWebsiteDbContext db = new FoodOnlineWebsiteDbContext();
+        private OnlineFoodWebsiteDbContext db = new OnlineFoodWebsiteDbContext();
 
         // GET: Administrator/CTHD
         public ActionResult Index()

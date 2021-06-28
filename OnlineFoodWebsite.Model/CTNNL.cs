@@ -10,18 +10,24 @@ namespace OnlineFoodWebsite.Model
     public partial class CTNNL
     {
         [Key]
-        [StringLength(10)]
+        [StringLength(30)]
         public string MACTN { get; set; }
 
-        [StringLength(10)]
+        [StringLength(30)]
         public string MANL { get; set; }
+
+        [Column(TypeName = "money")]
+        public decimal? CHIPHI { get; set; }
 
         public int? SOLUONG { get; set; }
 
-        [StringLength(10)]
-        public string DONVI { get; set; }
-
         [Column(TypeName = "date")]
         public DateTime? NGAYNHAP { get; set; }
+
+        [StringLength(10)]
+        public string DONVITINH { get; set; }
+        [StringLength(30)]
+        public string GHICHU { get; set; }
+        public virtual NGUYENLIEU NGUYENLIEU { get; set; }
     }
 }

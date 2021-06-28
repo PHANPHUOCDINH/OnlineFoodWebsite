@@ -1,4 +1,11 @@
-﻿<!DOCTYPE html>
+﻿@{ 
+    if(Session["userid"]==null)
+    {
+        Response.Redirect("/Administrator/Home/Login");
+    }
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -44,11 +51,12 @@
                     <!-- menu profile quick info -->
                     <div class="profile clearfix">
                         <div class="profile_pic">
-                            <img src="~/Areas/Administrator/Content/images/img.jpg" alt="..." class="img-circle profile_img">
+                            <img src="~/Areas/Administrator/Content/images/@Session["avatar"]" alt="..." class="img-circle profile_img">
                         </div>
                         <div class="profile_info">
                             <span>Welcome,</span>
-                            <h2>John Doe</h2>
+                            <h2>@Session["username"]</h2>
+                            @*<h2>@Session["username"]</h2>*@
                         </div>
                     </div>
                     <!-- /menu profile quick info -->
@@ -65,11 +73,25 @@
                                     <ul class="nav child_menu">
                                         <li><a href="/Administrator/MON/Index"><i class="fa fa-book"></i>Menu</a></li>
                                         <li><a href="/Administrator/HOADONs/Index"><i class="fa fa-edit"></i>Đơn Hàng</a></li>
-                                        <li><a href="/Administrator/NGUYENLIEU/Index"><i class="fa fa-clone"></i>Nhập Nguyên Liệu</a></li>
+                                        <li><a href="/Administrator/CTNNL/Index"><i class="fa fa-clone"></i>Nhập Nguyên Liệu</a></li>
                                         <li><a href="/Administrator/KHACHHANG/Index"><i class="fa fa-user"></i>Khách Hàng</a></li>
                                         <li><a href="/Administrator/NHANVIEN/Index"><i class="fa fa-user-md"></i>Nhân Viên</a></li>
-                                        <li><a href="/Administrator/MON/Index"><i class="fa fa-money"></i>Thu Chi</a></li>
-                                        <li><a href="/Administrator/MON/Index"><i class="fa fa-picture-o"></i>Bài Viết</a></li>
+                                        @*<li><a href="/Administrator/BAIVIET/Index"><i class="fa fa-picture-o"></i>Bài Viết</a></li>*@
+                                        <li>
+                                            <a><i class="fa fa-table"></i>Thống kê<span class="fa fa-chevron-down"></span></a>
+                                            <ul class="nav child_menu">
+                                                <!--<li class="sub_menu"><a href="level2.html">Level Two</a>-->
+                                                <li>
+                                                    <a href="/Administrator/ThongKe/ThongKeMonAn">Doanh thu theo món</a>
+                                                </li>
+                                                <li>
+                                                    <a href="/Administrator/ThongKe/ThongKeChiNguyenLieu">Chi phí nguyên liệu</a>
+                                                </li>
+                                                
+                                            </ul>
+</li>
+                                        
+                                        
                                     </ul>
                                 </li>
                                 
@@ -81,16 +103,8 @@
                     <!-- /sidebar menu -->
                     <!-- /menu footer buttons -->
                     <div class="sidebar-footer hidden-small">
-                        <a data-toggle="tooltip" data-placement="top" title="Settings">
-                            <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-                        </a>
-                        <a data-toggle="tooltip" data-placement="top" title="FullScreen">
-                            <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
-                        </a>
-                        <a data-toggle="tooltip" data-placement="top" title="Lock">
-                            <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
-                        </a>
-                        <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
+                       
+                        <a data-toggle="tooltip" data-placement="top" title="Logout" href="Administrator/Home/Logout">
                             <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
                         </a>
                     </div>
@@ -109,13 +123,13 @@
                         <ul class="nav navbar-nav navbar-right">
                             <li class="">
                                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                    <img src="~/Areas/Administrator/Content/images/img.jpg" alt="">John Doe
+                                    <img src="~/Areas/Administrator/Content/images/@Session["avatar"]" alt="">@Session["username"]
                                     <span class=" fa fa-angle-down"></span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-usermenu pull-right">
                                     <li><a href="javascript:;"> Profile</a></li>
                                    
-                                    <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                                    <li><a href="/Administrator/Home/Logout"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                                 </ul>
                             </li>
 
@@ -130,7 +144,7 @@
             <div class="right_col" role="main">
                 <!-- top tiles -->
                 <!-- /top tiles -->
-                @RenderBody();
+                @RenderBody()
                 
             </div>
             <!-- /page content -->

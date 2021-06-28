@@ -84,3 +84,5 @@ C:\Users\Admin\source\repos\OnlineFoodWebsite\OnlineFoodWebsite\bin\EntityFramew
 C:\Users\Admin\source\repos\OnlineFoodWebsite\OnlineFoodWebsite\bin\EntityFramework.dll
 C:\Users\Admin\source\repos\OnlineFoodWebsite\OnlineFoodWebsite\bin\EntityFramework.SqlServer.dll
 C:\Users\Admin\source\repos\OnlineFoodWebsite\OnlineFoodWebsite\bin\EntityFramework.SqlServer.xml
+C:\Users\Admin\source\repos\OnlineFoodWebsite\OnlineFoodWebsite\bin\System.Data.SQLite.dll
+C:\Users\Admin\source\repos\OnlineFoodWebsite\OnlineFoodWebsite\bin\System.Data.SQLite.xml

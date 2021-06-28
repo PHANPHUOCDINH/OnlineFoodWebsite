@@ -1,66 +1,70 @@
-﻿@model OnlineFoodWebsite.Model.KHACHHANG
+﻿@model IEnumerable<OnlineFoodWebsite.Model.HOADON>
 
 @{
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>Đơn hàng đã mua</h2>
 
 <div>
-    <h4>KHACHHANG</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.TENTK)
-        </dt>
+    <h4>Mã khách hàng: @ViewBag.MAKH</h4>
+    <table class="table">
+        <tr>
+            <th>STT</th>
+            <th>
+                Mã khách hàng
+            </th>
+            <th>
+                Ngày lập
+            </th>
+            <th>
+                Tổng tiền
+            </th>
+            <th>
+                Giảm giá
+            </th>
+            <th>
+                Ghi chú
+            </th>
+            <th>
+                Trạng thái
+            </th>
+            <th></th>
+        </tr>
 
-        <dd>
-            @Html.DisplayFor(model => model.TENTK)
-        </dd>
+        @{
+            int i = 0;
+            foreach (var item in Model)
+            {
+                i++;
+                <tr>
+                    <td>@i</td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MAKH)
 
-        <dt>
-            @Html.DisplayNameFor(model => model.HOTEN)
-        </dt>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NGAYLAP)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TONGTIEN)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.GIAMGIA) %
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.GHICHU)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TRANGTHAI)
+                    </td>
+                    <td>
+                       
+                        @Html.ActionLink("Chi tiết", "Details","HOADONs", new { id = item.MAHD },null)
+                    </td>
+                </tr>
+            }
+        }
+    </table>
 
-        <dd>
-            @Html.DisplayFor(model => model.HOTEN)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.NGAYSINH)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.NGAYSINH)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DIACHI)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DIACHI)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.GIOITINH)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.GIOITINH)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.SDT)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.SDT)
-        </dd>
-
-    </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.MAKH }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

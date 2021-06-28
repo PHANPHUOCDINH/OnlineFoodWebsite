@@ -1,0 +1,55 @@
+﻿@model List<OnlineFoodWebsite.Model.CTHD>
+@{
+    ViewBag.Title = "MyOrderDetail";
+}
+
+<style>
+    .center {
+        margin: auto;
+        width: 60%;
+        padding: 100px;
+    }
+</style>
+<h2>Giỏ hàng</h2>
+<div class="content">
+   
+        <table class="table">
+            <thead>
+                <tr>
+                    <td>STT</td>
+                    
+                    <td>Tên món</td>
+                    <td>Ảnh món</td>
+                    <td>Ghi chú</td>
+                    <td>Số lượng</td>
+                    <td>Đơn giá</td>
+                    <td>Thành tiền</td>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                @{ int i = 0;
+                    foreach (var item in Model)
+                    {
+                        i++;
+                        <tr>
+                            <td>@i</td>
+                            
+                            <td>@Html.DisplayFor(modelItem => item.MON.TENMON)</td>
+                            <td><img src="~/Content/images/1.jpg" alt="Image" width="128" height="128" /></td>
+
+                            <td><input type="text" class="txtGhiChu" data-id="@item.MAMON" value="@item.GHICHU" /></td>
+                            <td><input type="text" class="txtQuantity" data-id="@item.MAMON" value="@item.SOLUONG" /></td>
+                            <td>@Html.DisplayFor(modelItem => item.MON.GIA)</td>
+                            <td>@(item.MON.GIA*item.SOLUONG)</td>
+                            
+                        </tr>
+                    }
+                }
+
+            </tbody>
+        </table>
+        
+    
+   
+</div>
