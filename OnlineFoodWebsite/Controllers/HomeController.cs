@@ -12,6 +12,10 @@ namespace OnlineFoodWebsite.Controllers
         OnlineFoodWebsiteDbContext db = new OnlineFoodWebsiteDbContext();
         public ActionResult Index()
         {
+            if (TempData["result8"] != null)
+            {
+                ViewBag.Message8 = TempData["result8"].ToString();
+            }
             ViewBag.MonBanChay = db.MONs.OrderBy(r => Guid.NewGuid()).Take(4).ToList();
             return View();
         }

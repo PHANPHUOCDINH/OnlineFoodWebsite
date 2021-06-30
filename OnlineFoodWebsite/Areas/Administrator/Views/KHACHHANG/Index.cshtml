@@ -3,14 +3,24 @@
 @{
     ViewBag.Title = "Index";
 }
-
+@if (ViewBag.Message15 != null)
+{
+    <script>
+    var text='@ViewBag.Message15';
+    window.alert(text);
+    </script>
+}
 <h2>Danh sách khách hàng</h2>
-
-
-<table class="table">
+<input type="text" id="myInput1" onkeyup="myFunction1()" placeholder="Nhập tên cần tìm" title="Type in a name">
+<br />
+<br />
+<input type="text" id="myInput2" onkeyup="myFunction2()" placeholder="Nhập SĐT cần tìm" title="Type in a name">
+<br />
+<br />
+<table class="table" id="myTable">
     <tr>
         <th>
-           STT
+            STT
         </th>
         <th>
             Mã khách hàng
@@ -22,39 +32,81 @@
             SĐT
         </th>
         <th>
-           Địa chỉ
-         </th>
-       
+            Địa chỉ
+        </th>
+
         <th>Email</th>
     </tr>
 
-@{
-    int i =0;
-    foreach (var item in Model) {
-        i++;
-    <tr>
-        <td>
-            @i
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MAKH)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TENKH)
-        </td>
+    @{
+        int i = 0;
+        foreach (var item in Model)
+        {
+            i++;
+            <tr>
+                <td>
+                    @i
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MAKH)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TENKH)
+                </td>
 
-        <td>
-            @Html.DisplayFor(modelItem => item.SDT)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DIACHI)
-        </td>
-        <td> @Html.DisplayFor(modelItem => item.EMAIL)</td>
-        <td>
-            @Html.ActionLink("Xem đơn hàng đã mua", "Details", new { id = item.MAKH })
-
-        </td>
-    </tr>
-    }
+                <td>
+                    @Html.DisplayFor(modelItem => item.SDT)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DIACHI)
+                </td>
+                <td> @Html.DisplayFor(modelItem => item.EMAIL)</td>
+                <td>
+                    @Html.ActionLink("Xem đơn hàng đã mua", "Details", new { id = item.MAKH })
+                    <br />
+                    @Html.ActionLink("Cập nhật thông tin", "Edit", new { id = item.MAKH })
+                </td>
+            </tr>
+        }
     }
 </table>
+<script>
+    function myFunction1() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("myInput1");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[2];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>
+<script>
+    function myFunction2() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("myInput2");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[3];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>

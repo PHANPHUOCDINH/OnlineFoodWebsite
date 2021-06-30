@@ -15,6 +15,8 @@ namespace OnlineFoodWebsite.Controllers
         // GET: Cart
         public ActionResult Index()
         {
+            if(TempData["message"]!=null)
+                ViewBag.Message = TempData["message"].ToString();
             var cart = Session["cart"];
             var list = new List<CTHD>();
             if(cart!=null)
@@ -26,7 +28,7 @@ namespace OnlineFoodWebsite.Controllers
 
         public ActionResult AddItem(string idMon, int soluong)
         {
-
+            
             var product = db.MONs.Find(idMon);
             var cart = Session["cart"];
             if(cart!=null)
@@ -142,6 +144,8 @@ namespace OnlineFoodWebsite.Controllers
         public ActionResult Confirm(FormCollection form)
         {
             string ghichu = form["ghichu"];
+            string sdt = form["sdt"];
+            string diachi = form["diachi"];
             HOADON hoadon = new HOADON();
             string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
             hoadon.MAHD = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds().ToString();
@@ -150,7 +154,8 @@ namespace OnlineFoodWebsite.Controllers
             hoadon.TRANGTHAI = "Confirming";
             hoadon.GHICHUKHACH = ghichu;
             hoadon.TONGTIEN = (int)Session["money"];
-            
+            hoadon.DIACHI = diachi;
+            hoadon.SDT = sdt;
             db.HOADONs.Add(hoadon);
             var list = (List<CTHD>)Session["cart"];
             int i = 0;
@@ -173,6 +178,7 @@ namespace OnlineFoodWebsite.Controllers
             db.SaveChanges();
             Session["money"] = null;
             Session["cart"] = null;
+            TempData["message"] = "Order Successfully Submitted";
             //HOADON hoadon = db.HOADONs.Find(id);
             //if (ModelState.IsValid)
             //{

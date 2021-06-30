@@ -39,7 +39,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </script>
 <!-- start-smoth-scrolling -->
 </head>
-	
+<style>
+    .w3l_header_right {
+       float:right;
+	   margin-right:30px
+    }
+</style>
 <body>
 <!-- header -->
 	<div class="agileits_header">
@@ -51,7 +56,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             
                 <form action="/Home/Search" method="post">
                     <input type="text" name="product" value="Tìm kiếm món ăn..." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search a product...';}" required="">
-                    <input type="submit">
+                    <input type="submit" value="">
                 </form>
         </div>
 		<div class="product_list_header">  
@@ -67,17 +72,19 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 @if (Session["cusid"] == null)
                                 {
                                     <li><a href="/User/Login">Đăng nhập</a></li>
+                                    <li><a href="/User/Register">Đăng ký</a></li>
                                 }
                                 else
                                 {
                                     <li><a href="/User/Logout">Đăng xuất</a></li>
                                 }
 
-                                <li><a href="/User/Register">Đăng ký</a></li>
+
                                 <li><a href="/Cart/Index">Giỏ hàng</a></li>
                                 @if (Session["cusid"] != null)
                                 {
                                     <li><a href="/User/MyOrders">Đơn hàng của tôi</a></li>
+                                    <li><a href="/User/EditProfile">Cập nhật thông tin của tôi</a></li>
                                 }
                             </ul>
 						</div>                  

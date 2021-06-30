@@ -34,7 +34,8 @@ namespace OnlineFoodWebsite.Model
         [StringLength(100)]
         public string DIACHI { get; set; }
 
-        public int? GIOITINH { get; set; }
+        [StringLength(10)]
+        public string GIOITINH { get; set; }
 
         [StringLength(11)]
         public string SDT { get; set; }

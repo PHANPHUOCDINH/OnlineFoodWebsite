@@ -16,6 +16,7 @@ namespace OnlineFoodWebsite.Model
         [StringLength(40)]
         public string TENNV { get; set; }
 
+
         [StringLength(10)]
         public string TAIKHOAN { get; set; }
 
@@ -25,7 +26,8 @@ namespace OnlineFoodWebsite.Model
         [Column(TypeName = "date")]
         public DateTime? NGAYSINH { get; set; }
 
-        public int? GIOITINH { get; set; }
+        [StringLength(10)]
+        public string GIOITINH { get; set; }
 
         [StringLength(11)]
         public string SDT { get; set; }

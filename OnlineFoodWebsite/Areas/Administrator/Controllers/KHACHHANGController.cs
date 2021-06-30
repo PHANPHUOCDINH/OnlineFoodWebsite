@@ -4,6 +4,8 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Security.Cryptography;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using OnlineFoodWebsite.Model;
@@ -17,6 +19,10 @@ namespace OnlineFoodWebsite.Areas.Administrator.Controllers
         // GET: Administrator/KHACHHANG
         public ActionResult Index()
         {
+            if (TempData["result15"] != null)
+            {
+                ViewBag.Message15 = TempData["result15"].ToString();
+            }
             return View(db.KHACHHANGs.ToList());
         }
 
@@ -57,6 +63,19 @@ namespace OnlineFoodWebsite.Areas.Administrator.Controllers
         // GET: Administrator/KHACHHANG/Edit/5
         public ActionResult Edit(string id)
         {
+            List<SelectListItem> list = new List<SelectListItem>();
+            list.Add(new SelectListItem()
+            {
+                Text = "Nam",
+                Value = "Nam"
+            });
+            list.Add(new SelectListItem()
+            {
+                Text = "Nữ",
+                Value = "Nữ"
+            });
+
+            ViewBag.ListSex = new SelectList(list, "Value", "Text");
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -74,13 +93,36 @@ namespace OnlineFoodWebsite.Areas.Administrator.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "MAKH,TENTK,HOTEN,NGAYSINH,DIACHI,GIOITINH,SDT")] KHACHHANG kHACHHANG)
+        public ActionResult Edit(string id,[Bind(Include = "TENKH,NGAYSINH,DIACHI,GIOITINH,SDT,EMAIL,MATKHAU")] KHACHHANG kHACHHANG)
         {
+            KHACHHANG kh = db.KHACHHANGs.SingleOrDefault(x => x.MAKH==id);
+            List<SelectListItem> list = new List<SelectListItem>();
+            list.Add(new SelectListItem()
+            {
+                Text = "Nam",
+                Value = "Nam"
+            });
+            list.Add(new SelectListItem()
+            {
+                Text = "Nữ",
+                Value = "Nữ"
+            });
+
+            ViewBag.ListSex = new SelectList(list, "Value", "Text");
             if (ModelState.IsValid)
             {
-                db.Entry(kHACHHANG).State = EntityState.Modified;
+                kh.MATKHAU = CalculateMD5Hash(kHACHHANG.MATKHAU);
+                kh.TENKH = kHACHHANG.TENKH;
+                kh.NGAYSINH = kHACHHANG.NGAYSINH;
+                kh.DIACHI = kHACHHANG.DIACHI;
+                kh.GIOITINH = kHACHHANG.GIOITINH;
+                kh.SDT = kHACHHANG.SDT;
+                kh.EMAIL = kHACHHANG.EMAIL;
                 db.SaveChanges();
+                TempData["result15"] = "Cap nhat thong tin thanh cong!";
+                
                 return RedirectToAction("Index");
+                
             }
             return View(kHACHHANG);
         }
@@ -119,5 +161,18 @@ namespace OnlineFoodWebsite.Areas.Administrator.Controllers
             }
             base.Dispose(disposing);
         }
+        public static string CalculateMD5Hash(string input)
+        {
+            MD5 md5 = MD5.Create();
+            byte[] inputBytes = System.Text.Encoding.ASCII.GetBytes(input);
+            byte[] hash = md5.ComputeHash(inputBytes);
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < hash.Length; i++)
+            {
+                sb.Append(hash[i].ToString("X2"));
+            }
+            return sb.ToString();
+        }
+
     }
 }

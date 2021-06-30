@@ -17,6 +17,18 @@ namespace OnlineFoodWebsite.Areas.Administrator.Controllers
         // GET: Administrator/CTNNL
         public ActionResult Index()
         {
+            if (TempData["result4"] != null)
+            {
+                ViewBag.Message4 = TempData["result4"].ToString();
+            }
+            if (TempData["result10"] != null)
+            {
+                ViewBag.Message10 = TempData["result10"].ToString();
+            }
+            if (TempData["result11"] != null)
+            {
+                ViewBag.Message11 = TempData["result11"].ToString();
+            }
             return View(db.NGUYENLIEUx.ToList());
         }
 
@@ -53,6 +65,7 @@ namespace OnlineFoodWebsite.Areas.Administrator.Controllers
                 var nl = db.NGUYENLIEUx.SingleOrDefault(b => b.MANL == id);
                 nl.LASTUPDATE = cTNNL.NGAYNHAP;
                 db.SaveChanges();
+                TempData["result11"] = "Cap nhat nguyen lieu thanh cong!";
                 return RedirectToAction("Index");
             }
 
@@ -93,16 +106,19 @@ namespace OnlineFoodWebsite.Areas.Administrator.Controllers
         // GET: Administrator/CTNNL/Delete/5
         public ActionResult Delete(string id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            CTNNL cTNNL = db.CTNNLs.Find(id);
-            if (cTNNL == null)
-            {
-                return HttpNotFound();
-            }
-            return View(cTNNL);
+            
+            return View("Index");
+        }
+
+        public ActionResult DeleteNL(bool confirm, string id)
+        {
+            var listCTTN = db.CTNNLs.Where(x => x.MANL == id);
+            db.CTNNLs.RemoveRange(listCTTN);
+            var nl = db.NGUYENLIEUx.Find(id);
+            db.NGUYENLIEUx.Remove(nl);
+            db.SaveChanges();
+            TempData["result10"] = "Xoa nguyen lieu thanh cong!";
+            return RedirectToAction("Index");
         }
 
         // POST: Administrator/CTNNL/Delete/5
@@ -110,10 +126,12 @@ namespace OnlineFoodWebsite.Areas.Administrator.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            CTNNL cTNNL = db.CTNNLs.Find(id);
-            db.CTNNLs.Remove(cTNNL);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            
+            return View("Index");
+            //CTNNL cTNNL = db.CTNNLs.Find(id);
+            //db.CTNNLs.Remove(cTNNL);
+            //db.SaveChanges();
+            //return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
@@ -156,7 +174,7 @@ namespace OnlineFoodWebsite.Areas.Administrator.Controllers
                     db.NGUYENLIEUx.Add(nl);
                    
                         db.SaveChanges();
-                   
+                    TempData["result4"] = "Tao moi nguyen lieu thanh cong!";
                     return RedirectToAction("Index");
 
                 }

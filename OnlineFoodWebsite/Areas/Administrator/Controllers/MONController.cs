@@ -22,6 +22,18 @@ namespace OnlineFoodWebsite.Areas.Administrator.Controllers
         // GET: Administrator/MON
         public ActionResult Index()
         {
+            if (TempData["result"] != null)
+            {
+                ViewBag.Message = TempData["result"].ToString();
+            }
+            if (TempData["result1"] != null)
+            {
+                ViewBag.Message1 = TempData["result1"].ToString();
+            }
+            if (TempData["result2"] != null)
+            {
+                ViewBag.Message2 = TempData["result2"].ToString();
+            }
             return View(db.MONs.ToList());
         }
 
@@ -43,6 +55,18 @@ namespace OnlineFoodWebsite.Areas.Administrator.Controllers
         // GET: Administrator/MON/Create
         public ActionResult Create()
         {
+            List<SelectListItem> list = new List<SelectListItem>();
+            list.Add(new SelectListItem()
+            {
+                Text = "Hết hàng",
+                Value = "Hết hàng"
+            });
+            list.Add(new SelectListItem()
+            {
+                Text = "Còn hàng",
+                Value = "Còn hàng"
+            });
+            ViewBag.ListTT = new SelectList(list, "Value", "Text");
             ViewBag.MALOAI = new SelectList(db.LOAIMONs, "MALOAI", "TENLOAI");
             return View();
         }
@@ -54,7 +78,18 @@ namespace OnlineFoodWebsite.Areas.Administrator.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "MAMON,TENMON,MOTA,GIA,TINHTRANG,MALOAI,DONVITINH")] MON mON,HttpPostedFileBase file)
         {
-           
+            List<SelectListItem> list = new List<SelectListItem>();
+            list.Add(new SelectListItem()
+            {
+                Text = "Hết hàng",
+                Value = "Hết hàng"
+            });
+            list.Add(new SelectListItem()
+            {
+                Text = "Còn hàng",
+                Value = "Còn hàng"
+            });
+            ViewBag.ListTT = new SelectList(list, "Value", "Text");
             if (file != null)
             {
                
@@ -69,23 +104,40 @@ namespace OnlineFoodWebsite.Areas.Administrator.Controllers
                     string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
                     mON.MAMON = CurrentTimeMillis().ToString();
                     mON.HINHANH = ImageName;
+                    mON.SOLUONGBAN = 0;
                     db.MONs.Add(mON);
                     db.SaveChanges();
-                    
+                    TempData["result"] = "Tao moi thanh cong!";
                     return RedirectToAction("Index");
-
+                    
                 }
-
+                ViewBag.MALOAI = new SelectList(db.LOAIMONs, "MALOAI", "TENLOAI");
+                return View(mON);
+            }
+            else
+            {
+                
+                ViewBag.MALOAI = new SelectList(db.LOAIMONs, "MALOAI", "TENLOAI");
+                return View(mON);
             }
             
-            ViewBag.MALOAI = new SelectList(db.LOAIMONs, "MALOAI", "TENLOAI");
-            return View(mON);
         }
 
         // GET: Administrator/MON/Edit/5
         public ActionResult Edit(string id)
         {
-
+            List<SelectListItem> list = new List<SelectListItem>();
+            list.Add(new SelectListItem()
+            {
+                Text = "Hết hàng",
+                Value = "Hết hàng"
+            });
+            list.Add(new SelectListItem()
+            {
+                Text = "Còn hàng",
+                Value = "Còn hàng"
+            });
+            ViewBag.ListTT = new SelectList(list, "Value", "Text");
             ViewBag.MALOAI = new SelectList(db.LOAIMONs, "MALOAI", "TENLOAI");
             if (id == null)
             {
@@ -106,6 +158,18 @@ namespace OnlineFoodWebsite.Areas.Administrator.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(string id,[Bind(Include = "TENMON,MOTA,GIA,TINHTRANG,MALOAI,DONVITINH")] MON mON, HttpPostedFileBase file)
         {
+            List<SelectListItem> list = new List<SelectListItem>();
+            list.Add(new SelectListItem()
+            {
+                Text = "Hết hàng",
+                Value = "Hết hàng"
+            });
+            list.Add(new SelectListItem()
+            {
+                Text = "Còn hàng",
+                Value = "Còn hàng"
+            });
+            ViewBag.ListTT = new SelectList(list, "Value", "Text");
             MON mon = db.MONs.Find(id);
             if (file != null)
             {
@@ -127,6 +191,7 @@ namespace OnlineFoodWebsite.Areas.Administrator.Controllers
                     mon.HINHANH = ImageName;
                     db.Entry(mon).State = EntityState.Modified;
                     db.SaveChanges();
+                    TempData["result1"] = "Cap nhat thanh cong!";
                     return RedirectToAction("Index");
                 }
             }
@@ -142,6 +207,7 @@ namespace OnlineFoodWebsite.Areas.Administrator.Controllers
                     mon.MOTA = mON.MOTA;
                     db.Entry(mon).State = EntityState.Modified;
                     db.SaveChanges();
+                    TempData["result1"] = "Cap nhat thanh cong!";
                     return RedirectToAction("Index");
                 }
             }
@@ -172,6 +238,7 @@ namespace OnlineFoodWebsite.Areas.Administrator.Controllers
             MON mON = db.MONs.Find(id);
             db.MONs.Remove(mON);
             db.SaveChanges();
+            TempData["result2"] = "Xoa thanh cong!";
             return RedirectToAction("Index");
         }
 

@@ -3,18 +3,40 @@
 @{
     ViewBag.Title = "Index";
 }
-
+@if (ViewBag.Message5 != null)
+{
+    <script>
+    var text='@ViewBag.Message5';
+    window.alert(text);
+    </script>
+}
+@if (ViewBag.Message6 != null)
+{
+    <script>
+    var text='@ViewBag.Message6';
+    window.alert(text);
+    </script>
+}
+@if (ViewBag.Message7 != null)
+{
+    <script>
+    var text='@ViewBag.Message7';
+    window.alert(text);
+    </script>
+}
 <h2>Danh sách nhân viên hệ thống</h2>
+<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Nhập tên cần tìm" title="Type in a name">
+<br />
+<br />
 
-
-<table class="table">
+<table class="table" id="myTable">
     <tr>
         <th>STT</th>
         <th>
-           Mã nhân viên
+            Mã nhân viên
         </th>
         <th>
-           Tên nhân viên
+            Tên nhân viên
         </th>
         <th>
             Ngày sinh
@@ -28,48 +50,74 @@
         <th>Hoạt động gần nhất</th>
     </tr>
 
-@{ 
-    int i = 0;
-    foreach (var item in Model) {
-        i++;
-    <tr>
-        <td>@i</td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MANV)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TENNV)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NGAYSINH)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SDT)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CHUCVU)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LASTACTIVE)
-        </td>
-        @{ if (((string)Session["role"])=="Quản Lý")
-            {
+    @{
+        int i = 0;
+        foreach (var item in Model)
+        {
+            i++;
+            <tr>
+                <td>@i</td>
                 <td>
-                    @Html.ActionLink("Sửa", "Edit", new { id = item.MANV }) |
-                    @Html.ActionLink("Chi tiết", "Details", new { id = item.MANV }) |
-                    @Html.ActionLink("Xóa", "Delete", new { id = item.MANV })
+                    @Html.DisplayFor(modelItem => item.MANV)
                 </td>
-            }
-            else
-            {
-    
-            }
-        }
+                <td>
+                    @Html.DisplayFor(modelItem => item.TENNV)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NGAYSINH)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SDT)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CHUCVU)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LASTACTIVE)
+                </td>
+                @{ if (((string)Session["role"]) == "Quản lý")
+                    {
+                        <td>
+                            @Html.ActionLink("Sửa", "Edit", new { id = item.MANV }) |
+                            @Html.ActionLink("Chi tiết", "Details", new { id = item.MANV }) |
+                            @Html.ActionLink("Xóa", "Delete", new { id = item.MANV })
+                        </td>
+                    }
+                    else
+                    {
 
-    </tr>
+                    }
+                }
+
+            </tr>
         }
     }
 </table>
-<p>
-    @Html.ActionLink("Thêm mới", "Create")
-</p>
+
+@{ if (((string)Session["role"]) == "Quản lý")
+    {
+        <p>
+            @Html.ActionLink("Thêm mới", "Create")
+        </p>
+    }
+}
+<script>
+    function myFunction() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[2];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>

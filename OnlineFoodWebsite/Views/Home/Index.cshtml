@@ -3,7 +3,13 @@
     ViewBag.Title = "Home Page";
     List<MON> listMONBANCHAY = ViewBag.MonBanChay;
 }
-
+@if (ViewBag.Message8 != null)
+{
+    <script>
+    var text='@ViewBag.Message8';
+    window.alert(text);
+    </script>
+}
 <div class="top-brands">
     <div class="container">
         <h3>Món bán chạy</h3>
@@ -24,7 +30,7 @@
                                             <p>@item.TENMON</p>
                                             <h4>@item.GIA VNĐ</h4>
                                         </div>
-                                       
+
                                     </div>
                                 </figure>
                             </div>

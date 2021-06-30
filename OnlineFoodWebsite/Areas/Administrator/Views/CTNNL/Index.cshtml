@@ -3,55 +3,104 @@
 @{
     ViewBag.Title = "Index";
 }
+@if (ViewBag.Message4 != null)
+{
+    <script>
+    var text='@ViewBag.Message4';
+    window.alert(text);
+    </script>
+}
+@if (ViewBag.Message10 != null)
+{
+    <script>
+    var text='@ViewBag.Message10';
+    window.alert(text);
+    </script>
+}
+@if (ViewBag.Message11 != null)
+{
+    <script>
+    var text='@ViewBag.Message11';
+    window.alert(text);
+    </script>
+}
+<h2>
+    
+    <h2>Danh sách nguyên liệu</h2>
+    <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Nhập tên cần tìm" title="Type in a name">
+    <br />
+    <br />
 
-<h2>Danh sách nguyên liệu</h2>
+    <table class="table" id="myTable">
+        <tr>
+            <th>
+                STT
+            </th>
+            <th>
+                Tên nguyên liệu
+            </th>
+            <th>
+                Mô tả
+            </th>
+            <th>
+                Hình ảnh
+            </th>
+            <th>Cập nhật lần cuối</th>
 
+        </tr>
 
-<table class="table">
-    <tr>
-        <th>
-            STT
-        </th>
-        <th>
-            Tên nguyên liệu
-        </th>
-        <th>
-            Mô tả
-        </th>
-        <th>
-            Hình ảnh
-        </th>
-        <th>Cập nhật lần cuối</th>
-        
-    </tr>
-
-@{ 
-    int i = 0;
-    foreach (var item in Model) {
-        i++;
-    <tr>
-        <td>@i</td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TENNL)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MOTA)
-        </td>
-        <td>
-            <img src="~/Areas/Administrator/Content/images/@Url.Content(item.HINHANH)" alt="Image" width="128" height="128" />
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LASTUPDATE)
-        </td>
-        <td>
-            @Html.ActionLink("Cập nhật", "Create", new { id = item.MANL }) |
-            @Html.ActionLink("Xem chi tiết", "Details", new { id = item.MANL }) @*|
-            @Html.ActionLink("Delete", "Delete", new { id = item.MACTN })*@
-        </td>
-    </tr>
+        @{
+            int i = 0;
+            foreach (var item in Model)
+            {
+                i++;
+                <tr>
+                    <td>@i</td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TENNL)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MOTA)
+                    </td>
+                    <td>
+                        <img src="~/Areas/Administrator/Content/images/@Url.Content(item.HINHANH)" alt="Image" width="128" height="128" />
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LASTUPDATE)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Cập nhật", "Create", new { id = item.MANL }) |
+                        @Html.ActionLink("Xem chi tiết", "Details", new { id = item.MANL })
+                        |
+                        @Html.ActionLink("Xóa nguyên liệu", "DeleteNL", "CTNNL", new { confirm = true, id = item.MANL },
+        new { onclick = "return confirm('Bạn muốn xóa nguyên liệu này?')" })@*|
+                            @Html.ActionLink("Delete", "Delete", new { id = item.MACTN })*@
+    </td>
+</tr>
+}
         }
-    }
-</table>
-<p>
-    @Html.ActionLink("Thêm nguyên liệu mới", "TaoMoiNL")
-</p>
+    </table>
+    <p>
+        @Html.ActionLink("Thêm nguyên liệu mới", "TaoMoiNL")
+    </p>
+
+    <script>
+        function myFunction() {
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("myInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("myTable");
+            tr = table.getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[1];
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>

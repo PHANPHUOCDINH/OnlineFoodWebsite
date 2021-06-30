@@ -4,7 +4,7 @@
 }
 @section jsFooter{
     <script src="~/assets/client/js/controller/cartController.js"></script>
-    }
+}
 <style>
     .center {
         margin: auto;
@@ -12,56 +12,67 @@
         padding: 100px;
     }
 </style>
-<h2>Giỏ hàng</h2>
-<div class="content">
-    @if (Model.Count > 0)
-    {
-        <table class="table">
-            <thead>
-                <tr>
-                    <td>STT</td>
-                    <td>Mã món</td>
-                    <td>Tên món</td>
-                    <td>Ảnh món</td>
-                    <td>Ghi chú</td>
-                    <td>Số lượng</td>
-                    <td>Đơn giá</td>
-                    <td>Thành tiền</td>
-                    <td></td>
-                </tr>
-            </thead>
-            <tbody>
-                @{ int i = 0;
-                    foreach (var item in Model)
-                    {
-                        i++;
-                        <tr>
-                            <td>@i</td>
-                            <td>@Html.DisplayFor(modelItem => item.MAMON)</td>
-                            <td>@Html.DisplayFor(modelItem => item.MON.TENMON)</td>
-                            <td><img src="~/Areas/Administrator/Content/images/@item.MON.HINHANH" alt="Image" width="128" height="128" /></td>
+@if (ViewBag.Message != null)
+{
+    <script>
 
-                            <td><input type="text" class="txtGhiChu" data-id="@item.MAMON" value="@item.GHICHU" /></td>
-                            <td><input type="text" class="txtQuantity" data-id="@item.MAMON" value="@item.SOLUONG" /></td>
-                            <td>@Html.DisplayFor(modelItem => item.MON.GIA)</td>
-                            <td>@(item.MON.GIA*item.SOLUONG)</td>
-                            <td><a href="#" data-id="@item.MAMON" class="btn-delete">Xóa</a></td>
-                        </tr>
-                    }
-                }
+    $(document).ready(function () {
 
-            </tbody>
-        </table>
-        <button id="btnContinue" class="btn" >Tiếp tục mua hàng</button>
-        <button id="btnUpdate" class="btn">Cập nhật giỏ hàng</button>
-        <button id="btnDeleteAll" class="btn">Xóa giỏ hàng</button>
-                    if (Session["cusid"] != null)
-                    {
-        <button id="btnConfirm" class="btn">Xác nhận</button>
+        alert('@ViewBag.Message');
+
+    });
+
+    </script>}
+    <h2>Giỏ hàng</h2>
+    <div class="content">
+        @if (Model.Count > 0)
+        {
+            <table class="table">
+                <thead>
+                    <tr>
+                        <td>STT</td>
+                        <td>Mã món</td>
+                        <td>Tên món</td>
+                        <td>Ảnh món</td>
+                        <td>Ghi chú</td>
+                        <td>Số lượng</td>
+                        <td>Đơn giá</td>
+                        <td>Thành tiền</td>
+                        <td></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{ int i = 0;
+                        foreach (var item in Model)
+                        {
+                            i++;
+                            <tr>
+                                <td>@i</td>
+                                <td>@Html.DisplayFor(modelItem => item.MAMON)</td>
+                                <td>@Html.DisplayFor(modelItem => item.MON.TENMON)</td>
+                                <td><img src="~/Areas/Administrator/Content/images/@item.MON.HINHANH" alt="Image" width="128" height="128" /></td>
+
+                                <td><input type="text" class="txtGhiChu" data-id="@item.MAMON" value="@item.GHICHU" /></td>
+                                <td><input type="text" class="txtQuantity" data-id="@item.MAMON" value="@item.SOLUONG" /></td>
+                                <td>@Html.DisplayFor(modelItem => item.MON.GIA)</td>
+                                <td>@(item.MON.GIA*item.SOLUONG)</td>
+                                <td><a href="#" data-id="@item.MAMON" class="btn-delete">Xóa</a></td>
+                            </tr>
                         }
                     }
-                    else
-                    {
-        <span>Chưa có món nào trong giỏ hàng</span>
-    }
-</div>
+
+                </tbody>
+            </table>
+            <button id="btnContinue" class="btn">Tiếp tục mua hàng</button>
+            <button id="btnUpdate" class="btn">Cập nhật giỏ hàng</button>
+            <button id="btnDeleteAll" class="btn">Xóa giỏ hàng</button>
+            if (Session["cusid"] != null)
+            {
+                <button id="btnConfirm" class="btn">Xác nhận</button>
+            }
+        }
+        else
+        {
+            <span>Chưa có món nào trong giỏ hàng</span>
+        }
+    </div>

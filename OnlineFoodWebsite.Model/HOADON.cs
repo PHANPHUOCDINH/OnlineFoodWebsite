@@ -28,7 +28,7 @@ namespace OnlineFoodWebsite.Model
         [Column(TypeName = "money")]
         public decimal? TONGTIEN { get; set; }
 
-        public int? GIAMGIA { get; set; }
+       
 
         [StringLength(50)]
         public string GHICHU { get; set; }
@@ -40,12 +40,17 @@ namespace OnlineFoodWebsite.Model
         public virtual ICollection<CTHD> CTHDs { get; set; }
 
         public virtual KHACHHANG KHACHHANG { get; set; }
-        [StringLength(50)]
-        public string PHANHOI { get; set; }
+        
 
         [StringLength(50)]
         public string GHICHUKHACH { get; set; }
-
+        [StringLength(100)]
+        public string DIACHI { get; set; }
         public decimal? temp { get; set; }
+
+        [StringLength(11)]
+        public string SDT { get; set; }
+        [StringLength(40)]
+        public string NVPHUTRACH { get; set; }
     }
 }

@@ -54,7 +54,7 @@
         <div class="form-group">
             @Html.Label("Tình trạng", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.TINHTRANG, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownListFor(model => model.TINHTRANG, ViewBag.ListTT as SelectList, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.TINHTRANG, "", new { @class = "text-danger" })
             </div>
         </div>

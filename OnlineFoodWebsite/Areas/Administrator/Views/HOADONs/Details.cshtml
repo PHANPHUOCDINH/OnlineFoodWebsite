@@ -71,6 +71,7 @@
         <th>
             Hình ảnh
         </th>
+        <th>Số lượng</th>
         <th>Giá</th>
         <th>
             Ghi chú
@@ -90,6 +91,9 @@
             </td>
             <td>
                 <img src="~/Areas/Administrator/Content/images/@Url.Content(item.MON.HINHANH)" alt="Image" width="128" height="128" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SOLUONG)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.MON.GIA)

@@ -86,14 +86,22 @@
                                         <p>@item.TENMON</p>
                                         <h4>@item.GIA VNĐ /@item.DONVITINH</h4>
                                         <br />
-                                        @if (item.TINHTRANG == "Stocking")
+                                        @if (item.TINHTRANG == "Còn hàng")
                                         {
+                                            if (Session["cusid"] == null)
+                                            {
+                                                @Html.ActionLink("Thêm vào giỏ", "Login", "User", new { },
+                                                      new { onclick = "return alert('Vui lòng đăng nhập trước khi mua hàng')" })
+                                            }
+                                            else
+                                            {
                                             <h4><a href="/Cart/AddItem?idMon=@item.MAMON&soluong=1">Thêm vào giỏ</a></h4>
-                                        }
-                                        else if(item.TINHTRANG=="Out of stock")
-                {
-                    <h4>Hết hàng</h4>
-                }
+                                                }
+                                            }
+                                            else 
+                                            {
+                                            <h4>Hết hàng</h4>
+                                            }
 
                                     </div>
             </div>
@@ -103,7 +111,8 @@
                     </div>
                 </div>
 
-              
+
+
                 }
 
                 <div class="clearfix"> </div>

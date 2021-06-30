@@ -20,7 +20,7 @@ namespace OnlineFoodWebsite.Model
         public virtual DbSet<MON> MONs { get; set; }
         public virtual DbSet<NGUYENLIEU> NGUYENLIEUx { get; set; }
         public virtual DbSet<NHANVIEN> NHANVIENs { get; set; }
-
+        public virtual DbSet<ARTICLE> ARTICLEs { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<CTNNL>()
@@ -35,9 +35,7 @@ namespace OnlineFoodWebsite.Model
                 .Property(e => e.CHIPHI)
                 .HasPrecision(19, 4);
 
-            modelBuilder.Entity<CTNNL>()
-                .Property(e => e.DONVITINH)
-                .IsUnicode(false);
+          
 
             modelBuilder.Entity<CTHD>()
                 .Property(e => e.MACTHD)
@@ -50,10 +48,11 @@ namespace OnlineFoodWebsite.Model
             modelBuilder.Entity<CTHD>()
                 .Property(e => e.MAHD)
                 .IsUnicode(false);
+            
 
-            modelBuilder.Entity<CTHD>()
-                .Property(e => e.GHICHU)
-                .IsUnicode(false);
+            //modelBuilder.Entity<CTHD>()
+            //    .Property(e => e.GHICHU)
+            //    .IsUnicode(false);
 
             modelBuilder.Entity<HOADON>()
                 .Property(e => e.MAHD)
@@ -67,13 +66,13 @@ namespace OnlineFoodWebsite.Model
                 .Property(e => e.TONGTIEN)
                 .HasPrecision(19, 4);
 
-            modelBuilder.Entity<HOADON>()
-                .Property(e => e.GHICHU)
-                .IsUnicode(false);
+            //modelBuilder.Entity<HOADON>()
+            //    .Property(e => e.GHICHU)
+            //    .IsUnicode(false);
 
-            modelBuilder.Entity<HOADON>()
-                .Property(e => e.TRANGTHAI)
-                .IsUnicode(false);
+            //modelBuilder.Entity<HOADON>()
+            //    .Property(e => e.TRANGTHAI)
+            //    .IsUnicode(false);
 
             modelBuilder.Entity<KHACHHANG>()
                 .Property(e => e.MAKH)
@@ -111,9 +110,9 @@ namespace OnlineFoodWebsite.Model
                 .Property(e => e.HINHANH)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<MON>()
-                .Property(e => e.DONVITINH)
-                .IsUnicode(false);
+            //modelBuilder.Entity<MON>()
+            //    .Property(e => e.DONVITINH)
+            //    .IsUnicode(false);
 
             modelBuilder.Entity<NGUYENLIEU>()
                 .Property(e => e.MANL)
@@ -135,9 +134,10 @@ namespace OnlineFoodWebsite.Model
                 .Property(e => e.SDT)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<NHANVIEN>()
-                .Property(e => e.CHUCVU)
-                .IsUnicode(false);
+           
+            modelBuilder.Entity<ARTICLE>()
+               .Property(e => e.ArticleId)
+               .IsUnicode(false);
         }
     }
 }

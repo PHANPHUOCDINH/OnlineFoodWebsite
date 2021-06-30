@@ -17,6 +17,18 @@ namespace OnlineFoodWebsite.Areas.Administrator.Controllers
         // GET: Administrator/NHANVIENsontroller
         public ActionResult Index()
         {
+            if (TempData["result5"] != null)
+            {
+                ViewBag.Message5 = TempData["result5"].ToString();
+            }
+            if (TempData["result6"] != null)
+            {
+                ViewBag.Message6 = TempData["result6"].ToString();
+            }
+            if (TempData["result7"] != null)
+            {
+                ViewBag.Message7 = TempData["result7"].ToString();
+            }
             return View(db.NHANVIENs.ToList());
         }
 
@@ -38,6 +50,28 @@ namespace OnlineFoodWebsite.Areas.Administrator.Controllers
         // GET: Administrator/NHANVIENsontroller/Create
         public ActionResult Create()
         {
+            List<SelectListItem> list = new List<SelectListItem>();
+            list.Add(new SelectListItem()
+            {
+                Text = "Quản lý",
+                Value="Quản lý"
+            }) ;
+            list.Add(new SelectListItem()
+            {
+                Text = "Nhân viên bếp",
+                Value = "Nhân viên bếp"
+            });
+            list.Add(new SelectListItem()
+            {
+                Text = "Nhân viên kho",
+                Value = "Nhân viên kho"
+            });
+            list.Add(new SelectListItem()
+            {
+                Text = "Nhân viên đơn hàng",
+                Value = "Nhân viên đơn hàng"
+            });
+            ViewBag.ListChucVu = new SelectList(list, "Value", "Text");
             return View();
         }
 
@@ -48,6 +82,28 @@ namespace OnlineFoodWebsite.Areas.Administrator.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "TENNV,NGAYSINH,SDT,CHUCVU,TAIKHOAN,MATKHAU")] NHANVIEN nHANVIEN, HttpPostedFileBase file)
         {
+            List<SelectListItem> list = new List<SelectListItem>();
+            list.Add(new SelectListItem()
+            {
+                Text = "Quản lý",
+                Value = "Quản lý"
+            });
+            list.Add(new SelectListItem()
+            {
+                Text = "Nhân viên bếp",
+                Value = "Nhân viên bếp"
+            });
+            list.Add(new SelectListItem()
+            {
+                Text = "Nhân viên kho",
+                Value = "Nhân viên kho"
+            });
+            list.Add(new SelectListItem()
+            {
+                Text = "Nhân viên đơn hàng",
+                Value = "Nhân viên đơn hàng"
+            });
+            ViewBag.ListChucVu = new SelectList(list, "Value", "Text");
             if (file != null)
             {
 
@@ -64,6 +120,7 @@ namespace OnlineFoodWebsite.Areas.Administrator.Controllers
                     nHANVIEN.HINHANH = ImageName;
                     db.NHANVIENs.Add(nHANVIEN);
                     db.SaveChanges();
+                    TempData["result5"] = "Them moi nhan vien thanh cong!";
                     return RedirectToAction("Index");
 
                 }
@@ -116,6 +173,7 @@ namespace OnlineFoodWebsite.Areas.Administrator.Controllers
                     nv.HINHANH = ImageName;
                     db.Entry(nv).State = EntityState.Modified;
                     db.SaveChanges();
+                    TempData["result6"] = "Cap nhat thanh cong nhan vien!";
                     return RedirectToAction("Index");
                 }
             }
@@ -131,11 +189,12 @@ namespace OnlineFoodWebsite.Areas.Administrator.Controllers
                     nv.CHUCVU = nHANVIEN.CHUCVU;
                     db.Entry(nv).State = EntityState.Modified;
                     db.SaveChanges();
+                    TempData["result6"] = "Cap nhat thanh cong nhan vien!";
                     return RedirectToAction("Index");
                 }
             }
            
-            return View();
+            return View(nv);
         }
 
         // GET: Administrator/NHANVIENsontroller/Delete/5
@@ -161,6 +220,7 @@ namespace OnlineFoodWebsite.Areas.Administrator.Controllers
             NHANVIEN nHANVIEN = db.NHANVIENs.Find(id);
             db.NHANVIENs.Remove(nHANVIEN);
             db.SaveChanges();
+            TempData["result7"] = "Xoa nhan vien thanh cong!";
             return RedirectToAction("Index");
         }
 
@@ -172,5 +232,7 @@ namespace OnlineFoodWebsite.Areas.Administrator.Controllers
             }
             base.Dispose(disposing);
         }
+        
+       
     }
 }

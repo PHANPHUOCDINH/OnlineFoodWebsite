@@ -1,6 +1,7 @@
 ﻿using OnlineFoodWebsite.Model;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -36,6 +37,7 @@ namespace OnlineFoodWebsite.Controllers
                     KHACHHANG k = db.KHACHHANGs.SingleOrDefault(x => x.TAIKHOAN == kh.TAIKHOAN && x.MATKHAU == hashpw);
                     Session["cusname"] = k.TENKH;
                     Session["cusid"] = k.MAKH;
+                    Session["cus"] = k;
                     return RedirectToAction("Index", "Home");
                 }
                 else
@@ -53,6 +55,19 @@ namespace OnlineFoodWebsite.Controllers
         [HttpGet]
         public ActionResult Register()
         {
+            List<SelectListItem> list = new List<SelectListItem>();
+            list.Add(new SelectListItem()
+            {
+                Text = "Nam",
+                Value = "Nam"
+            });
+            list.Add(new SelectListItem()
+            {
+                Text = "Nữ",
+                Value = "Nữ"
+            });
+           
+            ViewBag.ListSex = new SelectList(list, "Value", "Text");
             return View();
         }
 
@@ -83,6 +98,19 @@ namespace OnlineFoodWebsite.Controllers
                     }
                 }
             }
+            List<SelectListItem> list = new List<SelectListItem>();
+            list.Add(new SelectListItem()
+            {
+                Text = "Nam",
+                Value = "Nam"
+            });
+            list.Add(new SelectListItem()
+            {
+                Text = "Nữ",
+                Value = "Nữ"
+            });
+
+            ViewBag.ListSex = new SelectList(list, "Value", "Text");
             return View();
         }
 
@@ -115,6 +143,8 @@ namespace OnlineFoodWebsite.Controllers
         {
             Session["cusid"] = null;
             Session["cusname"] = null;
+            Session["cart"] = null;
+            Session["cus"] = null;
             return RedirectToAction("Index","Home");
         }
 
@@ -139,6 +169,67 @@ namespace OnlineFoodWebsite.Controllers
             db.HOADONs.Remove(hd);
             db.SaveChanges();
             return RedirectToAction("MyOrders", "User");
+        }
+
+        public ActionResult EditProfile()
+        {
+            List<SelectListItem> list = new List<SelectListItem>();
+            list.Add(new SelectListItem()
+            {
+                Text = "Nam",
+                Value = "Nam"
+            });
+            list.Add(new SelectListItem()
+            {
+                Text = "Nữ",
+                Value = "Nữ"
+            });
+
+            ViewBag.ListSex = new SelectList(list, "Value", "Text");
+            return View((KHACHHANG)Session["cus"]);
+        }
+        [HttpPost]
+        public ActionResult EditProfile(KHACHHANG kh)
+        {
+            string id = Session["cusid"].ToString();
+            KHACHHANG kh1 = db.KHACHHANGs.SingleOrDefault(x => x.MAKH == id);
+            if (ModelState.IsValid)
+            {
+                if (checkUserName(kh.TAIKHOAN))
+                {
+                    ModelState.AddModelError("", "Tên đăng nhập đã tồn tại");
+                }
+                else
+                {
+                    kh1.DIACHI = kh.DIACHI;
+                    kh1.EMAIL = kh.EMAIL;
+                    kh1.GIOITINH = kh.GIOITINH;
+                    kh1.NGAYSINH = kh.NGAYSINH;
+                    kh1.TENKH = kh.TENKH;
+                    kh1.SDT = kh.SDT;
+                    
+                    kh1.MATKHAU = CalculateMD5Hash(kh.MATKHAU);
+                    Session["cus"] = kh1;
+                   
+                    db.SaveChanges();
+                    TempData["result8"] = "Cap nhat thong tin thanh cong!";
+                    return RedirectToAction("Index","Home");
+                }
+            }
+            List<SelectListItem> list = new List<SelectListItem>();
+            list.Add(new SelectListItem()
+            {
+                Text = "Nam",
+                Value = "Nam"
+            });
+            list.Add(new SelectListItem()
+            {
+                Text = "Nữ",
+                Value = "Nữ"
+            });
+
+            ViewBag.ListSex = new SelectList(list, "Value", "Text");
+            return View((KHACHHANG)Session["cus"]);
         }
     }
 }

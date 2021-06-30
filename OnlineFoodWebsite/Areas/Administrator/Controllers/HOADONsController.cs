@@ -17,6 +17,10 @@ namespace OnlineFoodWebsite.Areas.Administrator.Controllers
         // GET: Administrator/HOADONs
         public ActionResult Index()
         {
+            if (TempData["result3"] != null)
+            {
+                ViewBag.Message3 = TempData["result3"].ToString();
+            }
             return View(db.HOADONs.ToList());
         }
 
@@ -57,6 +61,38 @@ namespace OnlineFoodWebsite.Areas.Administrator.Controllers
         // GET: Administrator/HOADONs/Edit/5
         public ActionResult Edit(string id)
         {
+            List<SelectListItem> list = new List<SelectListItem>();
+            list.Add(new SelectListItem()
+            {
+                Text = "Confirming",
+                Value = "Confirming"
+            });
+            list.Add(new SelectListItem()
+            {
+                Text = "Confirmed",
+                Value = "Confirmed"
+            });
+            list.Add(new SelectListItem()
+            {
+                Text = "Cooking",
+                Value = "Cooking"
+            });
+            list.Add(new SelectListItem()
+            {
+                Text = "Packaged",
+                Value = "Packaged"
+            });
+            list.Add(new SelectListItem()
+            {
+                Text = "Delivering",
+                Value = "Delivering"
+            });
+            list.Add(new SelectListItem()
+            {
+                Text = "Finished",
+                Value = "Finished"
+            });
+            ViewBag.ListTT = new SelectList(list, "Value", "Text");
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -74,15 +110,49 @@ namespace OnlineFoodWebsite.Areas.Administrator.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(string id,[Bind(Include = "TRANGTHAI")] HOADON hOADON)
+        public ActionResult Edit(string id,[Bind(Include = "TRANGTHAI,GHICHU")] HOADON hOADON)
         {
+            List<SelectListItem> list = new List<SelectListItem>();
+            list.Add(new SelectListItem()
+            {
+                Text = "Confirming",
+                Value = "Confirming"
+            });
+            list.Add(new SelectListItem()
+            {
+                Text = "Confirmed",
+                Value = "Confirmed"
+            });
+            list.Add(new SelectListItem()
+            {
+                Text = "Cooking",
+                Value = "Cooking"
+            });
+            list.Add(new SelectListItem()
+            {
+                Text = "Packaged",
+                Value = "Packaged"
+            });
+            list.Add(new SelectListItem()
+            {
+                Text = "Delivering",
+                Value = "Delivering"
+            });
+            list.Add(new SelectListItem()
+            {
+                Text = "Finished",
+                Value = "Finished"
+            });
+            ViewBag.ListTT = new SelectList(list, "Value", "Text");
             HOADON hoadon = db.HOADONs.Find(id);
             if (ModelState.IsValid)
             {
-     
+                hoadon.GHICHU = hOADON.GHICHU;
                 hoadon.TRANGTHAI = hOADON.TRANGTHAI;
+                hoadon.NVPHUTRACH = Session["username"].ToString();
                 db.Entry(hoadon).State = EntityState.Modified;
                 db.SaveChanges();
+                TempData["result3"] = "Cap nhat thanh cong trang thai don hang "+id+"!";
                 return RedirectToAction("Index");
             }
             return View(hOADON);
